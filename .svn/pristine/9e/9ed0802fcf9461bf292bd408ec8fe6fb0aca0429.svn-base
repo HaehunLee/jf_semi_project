@@ -1,0 +1,84 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/jf/resources/bootstrap/css/bootstrap.min.css">
+    <script src="/jf/resources/bootstrap/js/jquery.min.js"></script>
+    <script src="/jf/resources/bootstrap/css/bootstrap.min.css"></script>
+</head>
+
+<body style="background-color: #fdfcf0; ">
+    <div>
+        <div class="nabar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/jf/main.jf" class="navbar-brand"><img style=" margin: -12px; height: 40px;" alt="" src="http://img.cgv.co.kr/R2014/images/title/h1_cgv.png"></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="adminform.jf?pno=1" class="dropdown-toggle" data-toggle="dropdown">관리자</a></li>
+                    <li><a href="movielist.jf?pno=1" class="dropdown-toggle" data-toggle="dropdown">영화리스트</a></li>
+                    <li><a href="screeningmovielist.jf?pno=1">상영관리</a></li>
+                    <li><a href="questionlist.jf?pno=1">Q&amp;A</a></li>
+                    <li><a href="noticelist.jf?pno=1">공지등록</a></li>
+                    <li><a href="eventlist.jf?pno=1">이벤트관리</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="">로그아웃</a></li>
+                </ul>
+                <p class="navbar-text  navbar-right">관리자님환영합니다</p>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div style="margin-top: 40px; margin-bottom: 40px;">
+                <FONT face="Impact" style="font-size: 50px;">
+                    SCREENING
+                </FONT>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <c:forEach var="movie" items="${movies}">
+                    <div class="col-sm-3 img-box text-center " style="height: 400px;">
+                        <img src="/jf/photos/movieposters/${movie.poster }" class="img-thumbnail" style="width:200px; height:280px;" />
+                        <div class="caption">
+                            <h4 style="letter-spacing:-1.7px;">${movie.korTitle }</h4>
+                            <p class="text">
+                                <small>
+                                    <fmt:formatDate value="${movie.releaseDate }" /></small>
+                            </p>
+                        </div>
+                        <div>
+                            <a href="screening.jf?mno=${movie.no }" class="btn btn-success">상영등록</a>
+                        </div>
+                        <br>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <ul class="pagination">
+                    <li><a href="">&laquo;</a></li>
+                    <c:forEach var="b" begin="1" end="${nos }">
+                        <li class="${param.pno eq b? 'active' : '' }"><a href="screeningmovielist.jf?pno=${b}">${b}</a></li>
+                    </c:forEach>
+                    <li><a href="">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>
